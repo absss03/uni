@@ -105,6 +105,7 @@ def retira_monto(saldo, moneda_elegida):
   else:
     print(f"el monto {monto_a_retirar} a retirar en {moneda_elegida} exede el saldo: {saldo}")
     error=1
+  
   return saldo, error
 # ------------------------------
 def menu_opcion_1(saldo_pesos, saldo_soles):
@@ -152,7 +153,7 @@ def menu_opcion_2(saldo, moneda_elegida):
   return saldo
 # ------------------------------
 def menu_opcion_3(saldo_pesos, saldo_soles, cuenta_ingresada):
-
+  devolucion = 0
   cuenta_ingresada = int (input ("Ingrese numero de cuenta: "))
   moneda_elegida=selecciona_moneda()
   if moneda_elegida=='Pesos': 
@@ -175,7 +176,7 @@ def menu_opcion_3(saldo_pesos, saldo_soles, cuenta_ingresada):
 
   return saldo, devolucion, moneda_elegida
 
-if prsiona_boton()== True:
+if prsiona_boton():
   print('._______________________.  \n|                       |   \n| BIENVENIDO AL CAJERO  |   \n| AUTOMATICO INTERBANCA | \n|_______________________|')
 # -------------------------------------------------------------------
 # Main
