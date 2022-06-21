@@ -24,6 +24,9 @@ devolucion_soles=0
 regresiva = 10
 
 def prsiona_boton():
+    ''' 
+    Esta funcion confirma que se haya presionado la tecla enter.
+    '''
     x=not input('presiona el boton de activación para continuar... \n>')
     while x==False:
         print("tecla incorrecta")
@@ -34,6 +37,9 @@ def prsiona_boton():
     return x
 # ------------------------------
 def selecciona_moneda():
+    ''' 
+    Esta funcion le permite al usuario elegir entre Soles y Pesos y devuelve su eleccion.
+    '''
     moneda=' '
     eleccion=True
 
@@ -49,6 +55,9 @@ def selecciona_moneda():
     return moneda
 # ------------------------------
 def confirma(texto):
+    '''
+    Esta funcion sirve para mostrar un mensaje que se reponde con si o no y devuelve la eleccion del usuario.
+    '''
     texto_impresion= f"Desea {texto} Si o No (S/N):"
     opcion=' '
     eleccion=True
@@ -63,6 +72,10 @@ def confirma(texto):
     return opcion
 # ------------------------------
 def solicita_clave():
+    '''
+    Esta funcion solicita el ingreso de una clave y la compara con la clave en la "base de datos". 
+    Si no coinciden le permite al usuario hasta tres intentos.
+    '''
     clave_aceptada=False
     reintentos=0
 
@@ -77,6 +90,9 @@ def solicita_clave():
     return clave_aceptada
 # ------------------------------
 def solicita_dni():
+    '''
+    Esta funcion solicita el ingreso de de un dni hasta que el mismo coincida con el que se encuentra en la "base de datos".
+    '''
     dni_aceptado=False
 
     while not dni_aceptado:         #si lel dni no es correcto
@@ -89,6 +105,12 @@ def solicita_dni():
     return dni_aceptado
 # ------------------------------
 def retira_monto(saldo_temp):
+    '''
+    Esta funcion verifica que el monto a retirar sea menor que el saldo.
+    Si es asi, retira la cantidad especificada por el usuario, de lo contrario le informara que la la transaccion no podra realizarse.
+    Ademas si el retiro es efectivo le ofrece al usuario la posibilidad de imprimir o ver por pantalla el comprobate. 
+    (Si elige la primer opcion solo vera un mensaje en la terminal, ya que la impresion de un tiket es simulada).
+    '''
     error=0
     monto_a_retirar = int(input("Ingrese monto a retirar: "))         #Pide el monto a retirar
     if monto_a_retirar <= saldo_temp:
@@ -107,6 +129,11 @@ def retira_monto(saldo_temp):
     return saldo_temp, error
 # ------------------------------
 def menu_opcion_1(saldo_pesos_temp, saldo_soles_temp):
+    '''
+    Esta funcion se encarga de mostrar las dos opciones que se encuentran en el Menu 1 (Posicion global o Movimientos).
+    Ademas dentro de los Movimientos podra verse la devolucion del dinero cuando se realiza una transferencia a una cuenta que no existe.
+    Del mismo modo que en etras funciones, cuando el usuario elige la imprsion de un comprobante solo vera un mensaje en la terminal ya que la misma es simulada.
+    '''
     opcion_ingresada=input(mensaje_menu_opcion_1)
 
     if opcion_ingresada == "A": # Posicion Global o Saldo
@@ -143,6 +170,10 @@ def menu_opcion_1(saldo_pesos_temp, saldo_soles_temp):
     return saldo_pesos_temp, saldo_soles_temp    #Necesito que retorne esto para poder actualizar el valor de las variables
 # ------------------------------
 def menu_opcion_2(saldo_temp):
+    '''
+    Esta funcion permite realizar retiros de dinero unicamente si el monto a retirar es menor o igual al saldo.
+    Si este se exede el usuario tendra la opcion de elegir entre cambiar dicho monto una vez mas o salir del Menu 2.
+    '''
     saldo_temp, error = retira_monto(saldo_temp)
     if error != 0:     #Si se cumple es o porque el monto exede el saldo o porque la contraseña es incorrecta
         if confirma('salir') == "N":                #El monto exede el saldo, ¿quiere salir?
@@ -151,6 +182,11 @@ def menu_opcion_2(saldo_temp):
     return saldo_temp
 # ------------------------------
 def menu_opcion_3(saldo_pesos_temp, saldo_soles_temp):
+    '''
+    Esta funcion permite realizar transferencias a cualquier cuenta.
+    La misma sera verificada luego de ingresar el monto a transferir y si no coincide con la cuenta que esta en la "base de datos"
+    le devolvera el dinero al usuario. (Esto se podra ver en el menu 1 opcion B)
+    '''
     devolucion_temp = 0
     cuenta_ingresada = int (input ("Ingrese numero de cuenta: "))
     moneda_elegida_temp =selecciona_moneda()
